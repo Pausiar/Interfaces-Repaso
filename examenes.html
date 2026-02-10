@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exámenes — Desarrollo de Interfaces</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="topnav">
+        <a href="index.html" class="nav-logo">DI</a>
+        <div class="nav-links">
+            <a href="temario.html">Resúmenes</a>
+            <a href="examenes.html" class="active">Exámenes</a>
+        </div>
+    </nav>
+
+    <div class="exam-container">
+        <h1 class="tema-title" style="text-align:center;margin-top:1rem;">Exámenes tipo test</h1>
+        <p style="text-align:center;color:#8b949e;margin-bottom:2rem;">4 exámenes · 40 preguntas · Si fallas, empiezas de 0</p>
+
+        <div class="exam-selector" id="examSelector">
+            <button class="exam-btn" onclick="startExam(0)">Examen 1<div class="difficulty-info">20 fácil · 10 media · 10 difícil</div></button>
+            <button class="exam-btn" onclick="startExam(1)">Examen 2<div class="difficulty-info">20 fácil · 10 media · 10 difícil</div></button>
+            <button class="exam-btn" onclick="startExam(2)">Examen 3<div class="difficulty-info">20 fácil · 10 media · 10 difícil</div></button>
+            <button class="exam-btn" onclick="startExam(3)">Examen 4<div class="difficulty-info">20 fácil · 10 media · 10 difícil</div></button>
+        </div>
+
+        <div class="quiz-area" id="quizArea">
+            <div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
+            <div class="streak-bar">
+                <span>Progreso:</span>
+                <div class="streak-dots" id="streakDots"></div>
+            </div>
+            <div class="quiz-header">
+                <span class="quiz-counter">Pregunta <span id="qNum">1</span>/40</span>
+                <span class="difficulty-badge" id="diffBadge"></span>
+            </div>
+            <div class="question-card">
+                <div class="question-text" id="qText"></div>
+                <div class="options-grid" id="optionsGrid"></div>
+            </div>
+            <div style="text-align:center;margin-top:1rem;">
+                <button class="result-btn btn-restart" onclick="backToSelector()" style="font-size:0.85rem;padding:0.5rem 1.2rem;">← Volver a exámenes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAIL OVERLAY -->
+    <div class="result-overlay" id="failOverlay">
+        <div class="result-card">
+            <div class="result-icon">💀</div>
+            <div class="result-title" style="color:#f85149;">¡Has fallado!</div>
+            <div class="result-msg" id="failMsg">Vuelves a empezar desde la pregunta 1.</div>
+            <button class="result-btn btn-restart" onclick="restartExam()">Reintentar desde el inicio</button>
+        </div>
+    </div>
+
+    <!-- SUCCESS OVERLAY -->
+    <div class="result-overlay" id="successOverlay">
+        <div class="result-card">
+            <div class="result-icon">🏆</div>
+            <div class="result-title" style="color:#3fb950;">¡Examen completado!</div>
+            <div class="result-msg" id="successMsg">Has contestado las 40 preguntas correctamente.</div>
+            <button class="result-btn btn-success" onclick="backToSelector()">Volver a exámenes</button>
+        </div>
+    </div>
+
+    <footer><p>Desarrollo de Interfaces — DAM</p></footer>
+
+<script>
+// ===================== ALL 160 QUESTIONS =====================
+// Each exam: 40 questions (indices 0-19 easy, 20-29 medium, 30-39 hard)
+const allExams = [
+
+// ==================== EXAMEN 1 ====================
+[
+// --- FÁCIL (20) ---
+{q:"¿Qué norma ISO define la usabilidad?",o:["ISO 9241-11","ISO 27001","ISO 9001","ISO 14001"],a:0,d:"facil"},
+{q:"¿Cuáles son los tres pilares de la usabilidad según la ISO 9241-11?",o:["Efectividad, eficiencia y satisfacción","Velocidad, diseño y color","Accesibilidad, portabilidad y seguridad","Funcionalidad, fiabilidad y mantenibilidad"],a:0,d:"facil"},
+{q:"Un radio button permite selección...",o:["Exclusiva (1 de N)","Múltiple (0 a N)","De texto libre","De arrastrar y soltar"],a:0,d:"facil"},
+{q:"¿Qué tipo de interfaz es la de un software interno de un banco que el empleado debe usar obligatoriamente?",o:["Uso obligado","Uso electivo","Uso opcional","Uso recreativo"],a:0,d:"facil"},
+{q:"¿Qué patrón de escaneo es típico en páginas con mucho texto como blogs?",o:["Patrón en F","Patrón en Z","Patrón en X","Patrón en L"],a:0,d:"facil"},
+{q:"¿Cuántos elementos puede retener la memoria a corto plazo según la Ley de Miller?",o:["Entre 5 y 9","Entre 1 y 3","Entre 10 y 15","Entre 20 y 25"],a:0,d:"facil"},
+{q:"Un checkbox permite selección...",o:["Múltiple (0 a N)","Exclusiva (1 de N)","Solo de 2 opciones","Secuencial"],a:0,d:"facil"},
+{q:"¿Qué tipo de diálogo bloquea el resto de la aplicación?",o:["Modal","No modal","Flotante","Emergente"],a:0,d:"facil"},
+{q:"¿Qué tipo de fuente es generalmente preferida para interfaces digitales?",o:["Sans Serif","Serif","Monospace","Cursiva"],a:0,d:"facil"},
+{q:"¿Qué estándar WCAG AA exige para el contraste de texto?",o:["Ratio 4.5:1","Ratio 2:1","Ratio 10:1","Ratio 1:1"],a:0,d:"facil"},
+{q:"¿Qué representa la fase final de obtención de información útil de una base de datos?",o:["Los informes","Las consultas SQL","Las tablas","Los formularios"],a:0,d:"facil"},
+{q:"¿Qué sección del informe aparece una sola vez al inicio con el título y logo?",o:["Cabecera del informe","Cabecera de página","Detalle","Pie de informe"],a:0,d:"facil"},
+{q:"¿Qué sección del informe contiene el grueso de la información y se repite por cada registro?",o:["Detalle","Cabecera del informe","Pie de grupo","Cabecera de grupo"],a:0,d:"facil"},
+{q:"¿Qué herramienta de informes utiliza archivos XML para definir la lógica visual?",o:["PHPReports","Crystal Reports","JasperReports","Microsoft Report Builder"],a:0,d:"facil"},
+{q:"En JasperReports, ¿cuál es el formato del fichero de diseño legible?",o:["JRXML","JASPER","JSON","CSV"],a:0,d:"facil"},
+{q:"¿Qué formato se obtiene al compilar un fichero JRXML?",o:[".jasper",".jar",".class",".pdf"],a:0,d:"facil"},
+{q:"¿Qué librería Apache se usa para generar PDFs en JasperReports?",o:["iText PDF Library","Apache POI","Commons Logging","Commons Digester"],a:0,d:"facil"},
+{q:"¿Qué tipo de control combina una caja de texto con una lista?",o:["Combo box","Drop-down list","Radio button","Checkbox"],a:0,d:"facil"},
+{q:"Según Nielsen, ¿qué heurística dice que el sistema siempre debe informar al usuario de lo que ocurre?",o:["Visibilidad del estado del sistema","Prevención de errores","Diseño estético y minimalista","Ayuda y documentación"],a:0,d:"facil"},
+{q:"¿Qué patrón de escaneo es típico en Landing Pages con poco texto?",o:["Patrón en Z","Patrón en F","Patrón en S","Patrón en W"],a:0,d:"facil"},
+
+// --- MEDIA (10) ---
+{q:"¿Qué diferencia hay entre eficacia y eficiencia en usabilidad?",o:["Eficacia es lograr el objetivo; eficiencia es con cuántos recursos","Eficiencia es lograr el objetivo; eficacia es la rapidez","Son sinónimos dentro de la ISO 9241-11","Eficacia mide satisfacción; eficiencia mide errores"],a:0,d:"media"},
+{q:"¿Qué es la affordance en diseño de interfaces?",o:["Lo que un objeto puede hacer (su capacidad funcional)","El color que tiene un botón","La posición de un elemento en pantalla","El tipo de fuente utilizada"],a:0,d:"media"},
+{q:"¿Cuál es la diferencia entre un informe incrustado y uno no incrustado?",o:["El incrustado se compila con el binario; el no incrustado es un archivo externo","El incrustado es dinámico; el no incrustado es estático","No hay diferencia real","El incrustado solo funciona en web"],a:0,d:"media"},
+{q:"¿Qué modelo de objetos de Crystal Reports permite manipular programáticamente el informe en tiempo de ejecución?",o:["ReportDocument","CrystalReportViewer","InfoObject","ReportEngine"],a:0,d:"media"},
+{q:"En la Ley de Jakob, ¿qué principio establece?",o:["Los usuarios esperan que tu sitio funcione como los demás que usan","Cada página debe tener máximo 7 elementos","Los colores deben ser consistentes","Los menús deben estar siempre visibles"],a:0,d:"media"},
+{q:"¿Cuál es la ventaja principal de filtrar datos en el origen (SQL) vs en el destino?",o:["Es más eficiente porque reduce la carga de datos transferidos","No tiene ninguna ventaja","Se obtienen más registros","Permite usar más colores en el informe"],a:0,d:"media"},
+{q:"¿Qué función de PHPReports recupera el valor actual del puntero en la fila?",o:["getValue(campo)","getSum(campo)","getMax(campo)","getRowCount()"],a:0,d:"media"},
+{q:"Un aviso de batería baja en el móvil, ¿qué tipo de diálogo debería ser?",o:["No modal, porque no debe interrumpir al usuario","Modal, porque es una alerta importante","Siempre debería ser una notificación push","No debería mostrarse nunca"],a:0,d:"media"},
+{q:"¿Por qué no se debe usar solo el color para transmitir información importante en una interfaz?",o:["Porque las personas con daltonismo no podrían percibirla","Porque los colores se ven diferentes en cada pantalla","Porque los colores distraen","Porque slows down rendering"],a:0,d:"media"},
+{q:"¿Qué sección del informe muestra subtotales y resúmenes por categoría?",o:["Pie de grupo","Cabecera del informe","Detalle","Cabecera de página"],a:0,d:"media"},
+
+// --- DIFÍCIL (10) ---
+{q:"¿Cuál es la diferencia entre affordance y significancia en diseño de interfaces?",o:["Affordance es lo que el objeto puede hacer; significancia es la pista visual que lo comunica","Son el mismo concepto con diferente nombre","Affordance es visual; significancia es funcional","Significancia solo aplica a iconos, affordance a botones"],a:0,d:"dificil"},
+{q:"En Crystal Reports, ¿qué modelo de objetos está orientado a configuración avanzada en servidores Enterprise?",o:["InfoObject","ReportDocument","CrystalReportViewer","ReportFactory"],a:0,d:"dificil"},
+{q:"¿Por qué se recomienda evitar el azul puro en texto fino de interfaces?",o:["El ojo humano tiene dificultad para enfocarlo en líneas finas","No se ve bien en pantallas OLED","Es un color reservado para enlaces","Reduce el contraste automáticamente"],a:0,d:"dificil"},
+{q:"¿Qué dependencia Apache en JasperReports se encarga del análisis de reglas de configuración XML de los JRXML?",o:["Commons Digester","Commons Logging","iText PDF Library","Apache POI"],a:0,d:"dificil"},
+{q:"¿Qué heurística de Nielsen establece que los aceleradores para expertos deben ser invisibles para los novatos?",o:["Flexibilidad y eficiencia de uso","Prevención de errores","Consistencia y estándares","Reconocer mejor que recordar"],a:0,d:"dificil"},
+{q:"¿Qué visor de JasperReports extiende JFrame y funciona como ventana independiente?",o:["JasperViewer","JRViewer","JasperExportManager","JasperPrint"],a:0,d:"dificil"},
+{q:"En un informe incrustado (embedded), ¿por qué ofrece mayor seguridad que uno externo?",o:["Porque al compilar se incrusta en el ensamblado (DLL/EXE) y no es editable","Porque usa encriptación AES","Porque requiere autenticación del usuario","Porque solo funciona en redes locales"],a:0,d:"dificil"},
+{q:"¿Por qué las rutas de disco fallan al empaquetar un JAR con informes JasperReports?",o:["Porque al empaquetar el JAR las rutas absolutas no existen dentro del archivo comprimido","Porque Java no soporta rutas de disco","Porque los informes deben ser compilados antes","Porque el JAR no puede contener archivos XML"],a:0,d:"dificil"},
+{q:"¿Qué test de usabilidad se realiza en la fase final para certificar que cumple los estándares?",o:["Test de validación","Test exploratorio","Test de evaluación","Test de comparación"],a:0,d:"dificil"},
+{q:"¿Qué método de Java permite acceder a ficheros de forma independiente al sistema operativo dentro de un JAR?",o:["getClass().getResource()","File.open()","System.loadLibrary()","Runtime.exec()"],a:0,d:"dificil"}
+],
+
+// ==================== EXAMEN 2 ====================
+[
+// --- FÁCIL (20) ---
+{q:"¿Qué es la usabilidad?",o:["El grado en que un producto puede ser usado con efectividad, eficiencia y satisfacción","La velocidad con la que carga una página","La cantidad de funciones que tiene un software","Lo bonito que es un diseño"],a:0,d:"facil"},
+{q:"En una interfaz de uso electivo, ¿qué pasa si la usabilidad es mala?",o:["El usuario se va a la competencia","El usuario debe adaptarse","No pasa nada","El sistema se cae"],a:0,d:"facil"},
+{q:"¿Qué sección del informe se repite en cada folio con los encabezados de columna?",o:["Cabecera de página","Cabecera del informe","Detalle","Pie de informe"],a:0,d:"facil"},
+{q:"¿Qué principio de diseño visual dice que los controles similares deben estar juntos?",o:["Agrupamiento","Visibilidad","Consistencia","Minimismo"],a:0,d:"facil"},
+{q:"¿Qué heurística de Nielsen habla de ofrecer salidas de emergencia claras como Deshacer?",o:["Control y libertad del usuario","Visibilidad del estado","Prevención de errores","Diseño minimalista"],a:0,d:"facil"},
+{q:"Un diálogo no modal permite...",o:["Interactuar con la ventana principal mientras está abierto","Bloquear toda la aplicación","Solo ver información","Ejecutar scripts automáticos"],a:0,d:"facil"},
+{q:"¿Qué componente de JasperReports se genera al llenar un .jasper con datos?",o:["JasperPrint","JRXML","JasperViewer","JRViewer"],a:0,d:"facil"},
+{q:"¿A qué formatos puede exportarse un JasperPrint?",o:["PDF, HTML, Excel, Word","Solo PDF","Solo HTML","Solo Excel"],a:0,d:"facil"},
+{q:"¿Qué propiedad del color se refiere a la pureza del mismo?",o:["Saturación","Tonalidad","Brillo","Opacidad"],a:0,d:"facil"},
+{q:"¿Qué tipo de usuario necesita claridad, guía paso a paso y seguridad?",o:["Usuario novato","Usuario experto","Administrador del sistema","Diseñador UX"],a:0,d:"facil"},
+{q:"¿Qué es un modelo mental en diseño de interfaces?",o:["Lo que el usuario cree sobre cómo funciona un sistema","El diagrama UML del sistema","El código fuente de la interfaz","Las instrucciones del manual"],a:0,d:"facil"},
+{q:"¿Qué función de PHPReports cuenta las filas del grupo actual?",o:["getRowCount()","getValue()","getSum()","getMax()"],a:0,d:"facil"},
+{q:"¿Qué librería Apache transforma datos en libros de Microsoft Excel en JasperReports?",o:["Apache POI","iText PDF","Commons Logging","Commons Digester"],a:0,d:"facil"},
+{q:"¿Cuál es el primer paso para crear un informe en Crystal Reports con Visual Studio?",o:["Nuevo Proyecto → Reporting → Aplicación de Crystal Reports","Abrir un archivo PDF","Escribir código SQL directamente","Crear una base de datos nueva"],a:0,d:"facil"},
+{q:"¿Qué regla de diseño dice que el texto oscuro debe ir sobre fondo claro?",o:["Contraste","Saturación","Agrupamiento","Affordance"],a:0,d:"facil"},
+{q:"¿Qué principio de la Gestalt dice que los elementos cercanos se perciben como relacionados?",o:["Principio de agrupamiento (proximidad)","Principio de similitud","Principio de cierre","Principio de continuidad"],a:0,d:"facil"},
+{q:"¿Qué tipo de test de usabilidad se usa en la fase inicial para evaluar conceptos preliminares?",o:["Test exploratorio","Test de validación","Test de comparación","Test de evaluación"],a:0,d:"facil"},
+{q:"Los informes incluyen metadatos como...",o:["Números de página, fechas de generación, agrupaciones","Solo el nombre de la base de datos","Solo la fecha actual","Solo el nombre del usuario"],a:0,d:"facil"},
+{q:"¿Qué es la tolerancia al error en usabilidad?",o:["Prevenir errores, facilitar recuperación y permitir reversibilidad","Ignorar todos los errores del usuario","Mostrar solo códigos de error técnicos","Reiniciar la app ante cualquier fallo"],a:0,d:"facil"},
+{q:"¿Qué sección del informe indica el inicio de una nueva categoría?",o:["Cabecera de grupo","Cabecera de página","Pie de informe","Detalle"],a:0,d:"facil"},
+
+// --- MEDIA (10) ---
+{q:"¿Qué diferencia principal hay entre una drop-down list y un combo box?",o:["El combo box permite escribir un valor nuevo además de elegir de la lista","No hay diferencia","La drop-down permite selección múltiple","El combo box solo muestra números"],a:0,d:"media"},
+{q:"¿Qué significa que la memorabilidad es clave para software de uso esporádico?",o:["Que el usuario pueda volver después de mucho tiempo y recordar cómo usarlo","Que el software se cierre automáticamente","Que necesita tutorial obligatorio cada vez","Que solo funciona con contraseña"],a:0,d:"media"},
+{q:"¿Por qué un radio button siempre debe tener una opción seleccionada por defecto?",o:["Para que el usuario siempre tenga un valor inicial válido y no deje la selección vacía","Porque el sistema no puede funcionar sin selección","Porque es una regla del navegador","Para que el formulario sea más bonito"],a:0,d:"media"},
+{q:"En PHPReports, ¿qué método vincula la lógica del informe con el archivo XML?",o:["setXML(\"archivo.xml\")","run()","setPassword()","setUser()"],a:0,d:"media"},
+{q:"¿Cuál es la diferencia entre el test de evaluación y el test de validación?",o:["Evaluación valida operaciones en fase intermedia; validación certifica en fase final","Son el mismo test con diferente nombre","Evaluación es más difícil","Validación se hace solo con código"],a:0,d:"media"},
+{q:"¿Qué heurística de Nielsen establece que es mejor un diseño que prevenga errores que buenos mensajes de error?",o:["Prevención de errores","Ayudar a reconocer errores","Visibilidad del estado","Control y libertad del usuario"],a:0,d:"media"},
+{q:"¿Por qué los informes son más complejos de construir que una consulta SQL?",o:["Porque requieren definir jerarquías, flujos y sumarios además de los datos","Porque necesitan más memoria RAM","Porque SQL no puede usarse en informes","Porque los informes no usan bases de datos"],a:0,d:"media"},
+{q:"Si un icono no tiene etiqueta de texto ni tooltip, ¿qué problema genera?",o:["Duda → fricción → mala usabilidad","Mejora el rendimiento","Es más accesible","No genera ningún problema"],a:0,d:"media"},
+{q:"¿Qué modelo de Crystal Reports es el más ligero y se usa para ver e imprimir informes?",o:["CrystalReportViewer","ReportDocument","InfoObject","ReportEngine"],a:0,d:"media"},
+{q:"¿Qué sucede si el diseño no coincide con el modelo mental del usuario?",o:["Se genera fricción y el usuario comete errores","El sistema se bloquea","El diseño se adapta automáticamente","No pasa nada importante"],a:0,d:"media"},
+
+// --- DIFÍCIL (10) ---
+{q:"¿Cuál es la diferencia entre un informe incrustado y uno no incrustado en cuanto a mantenimiento?",o:["El incrustado requiere recompilación; el no incrustado permite actualización en caliente","El incrustado se actualiza automáticamente; el no incrustado se borra","Ambos requieren recompilación","Ambos permiten actualización en caliente"],a:0,d:"dificil"},
+{q:"¿Qué estrategia debe seguirse si en una base de datos no hay un campo de 'ciudad' para filtrar informes?",o:["Buscar por rango de códigos postales o prefijos telefónicos","No se puede filtrar","Crear una nueva base de datos","Pedir al usuario que escriba la ciudad manualmente"],a:0,d:"dificil"},
+{q:"¿Qué heurística de Nielsen dice que cada unidad de información extra compite con la información relevante?",o:["Diseño estético y minimalista","Visibilidad del estado","Prevención de errores","Correspondencia con el mundo real"],a:0,d:"dificil"},
+{q:"En JasperReports, ¿en qué paso del flujo se une el .jasper con un DataSource?",o:["En el llenado (fill), generando un JasperPrint","En la compilación del JRXML","En la exportación a PDF","En la creación del diseño"],a:0,d:"dificil"},
+{q:"¿Qué diferencia hay entre JRViewer y JasperViewer?",o:["JRViewer está basado en JPanel (se incrusta en apps); JasperViewer extiende JFrame (ventana independiente)","Son iguales pero con diferente nombre","JRViewer solo exporta; JasperViewer solo visualiza","JRViewer es para web; JasperViewer para escritorio"],a:0,d:"dificil"},
+{q:"¿Qué dependencia de JasperReports se encarga de la gestión centralizada de depuración de errores del motor?",o:["Commons Logging","Commons Digester","iText PDF Library","Apache POI"],a:0,d:"dificil"},
+{q:"¿Qué clase de JasperReports se usa para exportaciones directas a ficheros sin interfaz gráfica?",o:["JasperExportManager","JasperViewer","JRViewer","JasperPrint"],a:0,d:"dificil"},
+{q:"¿Por qué la eficacia se considera un prerrequisito y la eficiencia una optimización?",o:["Porque primero el usuario debe lograr su objetivo y luego se mide con cuántos recursos lo hizo","Porque la eficiencia no importa","Porque la eficacia solo se mide en tests","Porque la eficiencia solo aplica a sistemas rápidos"],a:0,d:"dificil"},
+{q:"¿Qué tipo de prueba de usabilidad compara alternativas de diseño o con la competencia?",o:["Test de comparación","Test de validación","Test exploratorio","Test de evaluación"],a:0,d:"dificil"},
+{q:"¿Cuál es la regla de oro del filtrado de informes en Big Data?",o:["Basar los filtros en campos indexados para tiempos de respuesta óptimos","Usar solo filtros de texto","Nunca filtrar en Big Data","Filtrar siempre en el destino"],a:0,d:"dificil"}
+],
+
+// ==================== EXAMEN 3 ====================
+[
+// --- FÁCIL (20) ---
+{q:"¿Qué significa eficacia en usabilidad?",o:["Lograr el objetivo con precisión y plenitud","Hacerlo rápido","Que sea bonito","Que no haya errores técnicos"],a:0,d:"facil"},
+{q:"¿Qué significa eficiencia en usabilidad?",o:["Los recursos empleados (tiempo, esfuerzo) para lograr el objetivo","Lograr el objetivo","La satisfacción del usuario","El número de funciones disponibles"],a:0,d:"facil"},
+{q:"¿Qué principio de diseño establece que los controles frecuentes deben ser visibles y los raros ocultos?",o:["Visibilidad","Agrupamiento","Consistencia","Affordance"],a:0,d:"facil"},
+{q:"Un usuario experto necesita principalmente...",o:["Rapidez, eficiencia y control total","Guía paso a paso y seguridad","Colores brillantes","Tutoriales constantes"],a:0,d:"facil"},
+{q:"¿Qué tipo de fuente se considera mejor para papel impreso?",o:["Serif","Sans Serif","Monospace","Decorativa"],a:0,d:"facil"},
+{q:"¿Qué propiedad del color se refiere a la cantidad de luz?",o:["Brillo","Tonalidad","Saturación","Opacidad"],a:0,d:"facil"},
+{q:"¿Qué heurística de Nielsen habla de seguir las convenciones de la plataforma?",o:["Consistencia y estándares","Visibilidad del estado","Control y libertad","Diseño minimalista"],a:0,d:"facil"},
+{q:"¿Qué sección del informe contiene los totales generales?",o:["Pie de informe","Cabecera del informe","Detalle","Cabecera de grupo"],a:0,d:"facil"},
+{q:"¿Qué método ejecuta el motor de transformación en PHPReports?",o:["run()","execute()","start()","generate()"],a:0,d:"facil"},
+{q:"¿Para qué sirve un diálogo modal?",o:["Para decisiones críticas como confirmar borrado de datos","Para mostrar paletas de herramientas","Para mostrar notificaciones informativas","Para hacer búsquedas"],a:0,d:"facil"},
+{q:"¿Qué heurística de Nielsen dice que hay que hablar el lenguaje del usuario?",o:["Correspondencia con el mundo real","Consistencia y estándares","Diseño minimalista","Prevención de errores"],a:0,d:"facil"},
+{q:"La facilidad de aprendizaje es clave para sistemas de...",o:["Uso público como webs","Uso interno de empresa","Uso esporádico","Juegos"],a:0,d:"facil"},
+{q:"¿Qué tipo de conexión configura Crystal Reports para acceder a SQL Server?",o:["OLE DB (ADO)","FTP","SSH","WebSocket"],a:0,d:"facil"},
+{q:"¿Qué representa la tonalidad de un color?",o:["El color en sí (rojo, verde, azul...)","La pureza del color","La cantidad de luz","La transparencia"],a:0,d:"facil"},
+{q:"¿Qué acción realiza la función getSum(campo) de PHPReports?",o:["Acumula en memoria los valores para el grupo actual","Recupera el valor actual","Cuenta filas","Obtiene el valor máximo"],a:0,d:"facil"},
+{q:"Una tienda online es un ejemplo de interfaz de...",o:["Uso electivo","Uso obligado","Uso interno","Uso restringido"],a:0,d:"facil"},
+{q:"¿Qué es la reversibilidad en tolerancia al error?",o:["La posibilidad de deshacer acciones (botón Deshacer)","Que el sistema nunca falle","Que no haya botones","Que el sistema se reinicie solo"],a:0,d:"facil"},
+{q:"¿Qué heurística dice que es mejor reconocer que recordar?",o:["Reconocer mejor que recordar","Prevención de errores","Consistencia y estándares","Ayuda y documentación"],a:0,d:"facil"},
+{q:"Un panel de colores en Photoshop debería ser un diálogo...",o:["No modal, porque necesitas ver el lienzo","Modal, porque es una herramienta importante","Maximizado","Minimizado"],a:0,d:"facil"},
+{q:"¿Dónde se ubican los subtotales de un grupo en un informe?",o:["En el pie de grupo","En la cabecera del informe","En el detalle","En la cabecera de página"],a:0,d:"facil"},
+
+// --- MEDIA (10) ---
+{q:"¿Qué ventaja tienen los informes no incrustados sobre los incrustados?",o:["Permiten actualización en caliente sin recompilar","Son más seguros","Se compilan automáticamente","Tienen mejor rendimiento"],a:0,d:"media"},
+{q:"¿Por qué la satisfacción del usuario es importante en usabilidad?",o:["Porque un usuario insatisfecho abandonará el producto incluso si es funcional","Solo importa en redes sociales","No es realmente importante","Solo afecta a usuarios novatos"],a:0,d:"media"},
+{q:"¿Qué problema puede generar usar colores muy saturados en una interfaz?",o:["Cansan la vista del usuario","Mejoran la legibilidad","No generan ningún problema","Hacen la interfaz más accesible"],a:0,d:"media"},
+{q:"¿Qué significa que la significancia es una pista visual que comunica la affordance?",o:["Que elementos visuales como sombras o bordes indican que algo es clickeable","Que el color del botón cambia al hacer click","Que hay un manual de usuario incluido","Que todos los elementos deben ser iguales"],a:0,d:"media"},
+{q:"¿Por qué es mejor usar un calendario en lugar de pedir escribir fechas manualmente?",o:["Porque previene errores de formato y entrada","Porque es más bonito","Porque ocupa menos espacio","Porque es obligatorio por ley"],a:0,d:"media"},
+{q:"¿Qué riesgo tiene una interfaz de uso obligado con mala usabilidad?",o:["El usuario se frustra pero debe adaptarse, reduciendo productividad","El usuario se va a la competencia","No tiene ningún riesgo","El sistema se vuelve más seguro"],a:0,d:"media"},
+{q:"¿Para qué caso de uso son ideales los informes no incrustados?",o:["ERPs e informes web dinámicos donde el diseño cambia frecuentemente","Apps de escritorio cerradas","Aplicaciones móviles","Juegos"],a:0,d:"media"},
+{q:"¿Qué heurística de Nielsen dice que los mensajes de error deben estar en lenguaje claro y sugerir solución?",o:["Ayudar a reconocer, diagnosticar y recuperarse de errores","Prevención de errores","Consistencia y estándares","Visibilidad del estado"],a:0,d:"media"},
+{q:"¿Qué significado puede tener el color rojo según la cultura?",o:["Puede significar peligro o suerte según la cultura","Siempre significa peligro","Siempre significa amor","No tiene significado cultural"],a:0,d:"media"},
+{q:"¿Cuál es la diferencia entre evaluación heurística y test con usuarios?",o:["Heurística la hacen expertos buscando violaciones de principios; test con usuarios observa personas reales","Son el mismo proceso","Heurística es más cara","Test con usuarios no requiere observación"],a:0,d:"media"},
+
+// --- DIFÍCIL (10) ---
+{q:"Si pones el logo de un sitio web a la derecha en vez de a la izquierda, ¿qué principio se viola?",o:["La Ley de Jakob (modelo mental del usuario basado en otros sitios)","Principio de agrupamiento","Ley de Miller","Principio de contraste"],a:0,d:"dificil"},
+{q:"¿Por qué getClass().getResource() es preferible a rutas absolutas para acceder a informes en Java?",o:["Porque funciona independientemente del SO y dentro de archivos JAR","Porque es más rápido","Porque no necesita permisos de lectura","Porque solo funciona en Windows"],a:0,d:"dificil"},
+{q:"¿Qué relación hay entre la Ley de Miller y el diseño de menús de navegación?",o:["Los menús no deben mostrar más de 5-9 opciones seguidas sin agrupar","Los menús deben ser siempre horizontales","La ley no aplica a menús","Los menús deben tener al menos 15 opciones"],a:0,d:"dificil"},
+{q:"En el flujo de JasperReports, ¿por qué el JRXML solo se recompila si hay cambios en el diseño?",o:["Porque el .jasper binario ya compilado se reutiliza para mejorar rendimiento","Porque Java no permite recompilaciones","Porque el JRXML se borra después de compilar","Porque los cambios de datos requieren recompilación"],a:0,d:"dificil"},
+{q:"¿Cuál es el uso ideal de informes incrustados (embedded)?",o:["Aplicaciones de escritorio cerradas donde la seguridad prima","ERPs web con informes dinámicos","Sistemas donde el diseño cambia frecuentemente","Aplicaciones móviles con actualizaciones constantes"],a:0,d:"dificil"},
+{q:"¿Qué heurística de Nielsen se viola si una aplicación usa términos técnicos incomprensibles para el usuario final?",o:["Correspondencia con el mundo real","Consistencia y estándares","Diseño minimalista","Flexibilidad y eficiencia"],a:0,d:"dificil"},
+{q:"¿Qué impacto tiene la falta de significancia en un botón plano sin bordes ni sombras?",o:["El usuario no reconoce que es interactivo y no lo pulsa","El botón funciona más rápido","Mejora la accesibilidad","Reduce el tiempo de carga"],a:0,d:"dificil"},
+{q:"En PHPReports, ¿qué función se usa para mostrar el récord de ventas (valor más alto) de un grupo?",o:["getMax(campo)","getSum(campo)","getValue(campo)","getRowCount()"],a:0,d:"dificil"},
+{q:"¿Por qué es importante que las carpetas marcadas como Resources se inyecten en el classpath al construir?",o:["Para que los informes sean accesibles dentro del JAR empaquetado independientemente del SO","Para que el IDE compile más rápido","Para que los archivos se borren automáticamente","Para cumplir requisitos de seguridad"],a:0,d:"dificil"},
+{q:"¿Qué test de usabilidad es más apropiado para comparar tu diseño con el de la competencia?",o:["Test de comparación","Test de validación","Test exploratorio","Test de evaluación"],a:0,d:"dificil"}
+],
+
+// ==================== EXAMEN 4 ====================
+[
+// --- FÁCIL (20) ---
+{q:"¿Qué heurística de Nielsen habla de ofrecer ayuda y documentación fácil de buscar?",o:["Ayuda y documentación","Prevención de errores","Visibilidad del estado","Diseño estético"],a:0,d:"facil"},
+{q:"Los registros individuales crudos se muestran en...",o:["Una tabla","Un informe","Un formulario","Un gráfico"],a:0,d:"facil"},
+{q:"¿Qué propiedad del color se refiere al color en sí?",o:["Tonalidad","Saturación","Brillo","Contraste"],a:0,d:"facil"},
+{q:"¿Qué heurística habla de no contener información irrelevante?",o:["Diseño estético y minimalista","Ayuda y documentación","Visibilidad del estado","Control y libertad"],a:0,d:"facil"},
+{q:"¿Qué clase se instancia primero en PHPReports?",o:["PHPReportMaker","PHPReportViewer","PHPReportEngine","PHPReportBuilder"],a:0,d:"facil"},
+{q:"¿Dónde debe ponerse el botón de compra según el patrón en Z?",o:["Abajo-derecha","Arriba-izquierda","Centro de la página","Abajo-izquierda"],a:0,d:"facil"},
+{q:"¿Qué tres cosas debe dar la tolerancia al error?",o:["Prevención, recuperación y reversibilidad","Velocidad, color y tamaño","Contraste, brillo y saturación","Eficacia, eficiencia y satisfacción"],a:0,d:"facil"},
+{q:"¿Qué principio de diseño mantiene la misma distribución y estilo en toda la app?",o:["Consistencia","Agrupamiento","Visibilidad","Affordance"],a:0,d:"facil"},
+{q:"¿Qué tipo de interfaz ideal tiene el usuario experto?",o:["Atajos de teclado, comandos, personalización","Asistentes y menús explicativos","Iconos grandes con texto descriptivo","Tutoriales interactivos"],a:0,d:"facil"},
+{q:"En un informe, ¿qué son los campos calculados?",o:["Resultados que no existen físicamente en la BD como porcentajes","Campos que se calculan a mano","Columnas vacías del informe","Campos obligatorios del formulario"],a:0,d:"facil"},
+{q:"¿Cómo se escribe un buen mensaje de error según la usabilidad?",o:["En lenguaje claro indicando el problema y sugiriendo solución","Con un código numérico técnico","Solo con el texto 'Error'","En inglés siempre"],a:0,d:"facil"},
+{q:"¿Qué función de PHPReports obtiene el valor máximo del grupo?",o:["getMax(campo)","getSum(campo)","getValue(campo)","getAvg(campo)"],a:0,d:"facil"},
+{q:"¿Qué es la facilidad de aprendizaje en usabilidad?",o:["La facilidad para realizar tareas la primera vez que se usa el diseño","La velocidad de carga de la página","La cantidad de tutoriales disponibles","El número de idiomas soportados"],a:0,d:"facil"},
+{q:"¿Qué sucede cuando guardas cambios al cerrar una aplicación? ¿Qué tipo de diálogo aparece?",o:["Modal, porque es una decisión crítica","No modal, porque no es importante","No aparece ninguno","Un diálogo flotante"],a:0,d:"facil"},
+{q:"¿Qué usa una drop-down list para evitar errores del usuario?",o:["Una lista cerrada de opciones predefinidas","Texto libre sin validación","Solo números","Solo fechas"],a:0,d:"facil"},
+{q:"¿Cuántas heurísticas estableció Jakob Nielsen?",o:["10","5","7","12"],a:0,d:"facil"},
+{q:"El espacio en blanco sirve para...",o:["Separar secciones visualmente y mejorar la legibilidad","Desperdiciar espacio en pantalla","Hacer la página más lenta","Ocultar contenido importante"],a:0,d:"facil"},
+{q:"¿Con qué se deben acompañar siempre los iconos para evitar ambigüedad?",o:["Etiqueta de texto o tooltip","Más iconos","Colores brillantes","Animaciones"],a:0,d:"facil"},
+{q:"¿Qué formato universal tienen los informes para presentar información?",o:["Lenguaje visual y escrito comprensible sin formación previa","Solo código binario","Solo gráficos","Solo tablas numéricas"],a:0,d:"facil"},
+{q:"¿Qué componente de un informe otorga permanencia y movilidad fuera del sistema?",o:["La portabilidad (diseñados para impresión)","La velocidad","El color","La base de datos"],a:0,d:"facil"},
+
+// --- MEDIA (10) ---
+{q:"¿Por qué en el patrón en F el contenido importante debe estar al inicio de los párrafos?",o:["Porque el usuario solo lee las primeras palabras de cada línea antes de escanear verticalmente","Porque los motores de búsqueda lo exigen","Porque el CSS lo requiere","Porque las pantallas solo muestran el inicio"],a:0,d:"media"},
+{q:"¿Qué problema genera tener un menú con 15 opciones seguidas sin agrupar?",o:["Viola la Ley de Miller al superar la capacidad de memoria a corto plazo","Mejora la navegación","No genera ningún problema","Hace la app más profesional"],a:0,d:"media"},
+{q:"¿Cuál es la diferencia entre prevenir errores y recuperarse de errores?",o:["Prevenir usa diseño proactivo (ej. calendarios); recuperarse ofrece mensajes claros después del error","Son lo mismo","Prevenir es más costoso así que no se recomienda","Recuperarse significa reiniciar el sistema"],a:0,d:"media"},
+{q:"¿Qué ventaja tiene un informe incrustado en cuanto a implementación?",o:["Es más simple con menos archivos que gestionar","Es más flexible","Permite cambios en caliente","Es más dinámico"],a:0,d:"media"},
+{q:"¿Qué heurística de Nielsen cubre los atajos de teclado para usuarios avanzados?",o:["Flexibilidad y eficiencia de uso","Prevención de errores","Consistencia y estándares","Visibilidad del estado"],a:0,d:"media"},
+{q:"¿Por qué el Principio de agrupamiento de la Gestalt es importante en diseño?",o:["Porque el cerebro agrupa elementos cercanos como relacionados y esto organiza la información","Porque los elementos deben estar lejos entre sí","Porque mejora la velocidad de carga","Porque es obligatorio por normativa"],a:0,d:"media"},
+{q:"¿Qué hace el método setUser() en PHPReports?",o:["Define las credenciales de usuario para la conexión a la base de datos","Cambia el nombre del informe","Establece el estilo visual","Exporta el informe"],a:0,d:"media"},
+{q:"¿Por qué se dice que el botón Deshacer es la mejor herramienta para un usuario?",o:["Porque permite revertir acciones no deseadas, ofreciendo seguridad y reduciendo el miedo al error","Porque es el botón más grande","Porque es obligatorio en todas las apps","Porque los usuarios no leen instrucciones"],a:0,d:"media"},
+{q:"¿Cuál es la función de la cabecera de página en un informe?",o:["Repetir los encabezados de columna y numeración en cada folio","Mostrar el logo una sola vez","Calcular totales generales","Filtrar los datos"],a:0,d:"media"},
+{q:"¿Qué relación hay entre un enlace azul subrayado y el concepto de affordance?",o:["El color azul y el subrayado son significantes que comunican la affordance de navegar","El azul es obligatorio para todos los links","El subrayado reduce la accesibilidad","No hay relación"],a:0,d:"media"},
+
+// --- DIFÍCIL (10) ---
+{q:"¿Cuál es la principal diferencia en seguridad entre informes incrustados y no incrustados?",o:["El incrustado está protegido dentro del binario compilado; el no incrustado es editable en disco","No hay diferencia de seguridad","El no incrustado es más seguro","Ambos usan encriptación"],a:0,d:"dificil"},
+{q:"¿Por qué heurística falla una app que muestra 'Error 404' en vez de 'La página que busca no existe'?",o:["Ayudar a reconocer, diagnosticar y recuperarse de errores","Visibilidad del estado","Diseño estético y minimalista","Consistencia y estándares"],a:0,d:"dificil"},
+{q:"¿Qué implicación tiene que el informe represente resultados que no existen físicamente en la BD?",o:["Que puede generar campos calculados, porcentajes e indicadores de rendimiento derivados de los datos","Que los datos son falsos","Que la BD está corrupta","Que necesita otra base de datos"],a:0,d:"dificil"},
+{q:"En el patrón en Z, ¿por qué la diagonal va de arriba-derecha a abajo-izquierda?",o:["Porque el ojo sigue un recorrido natural de lectura y busca el siguiente punto de interés","Porque las pantallas tienen ese ángulo","Porque CSS define esa dirección","Porque los navegadores lo fuerzan"],a:0,d:"dificil"},
+{q:"¿Cuándo tiene sentido usar un informe no incrustado en vez de uno incrustado?",o:["Cuando el diseño del informe cambia frecuentemente y no se quiere recompilar el software","Cuando la seguridad es máxima prioridad","Cuando solo hay un informe en la app","Cuando no se usa base de datos"],a:0,d:"dificil"},
+{q:"¿Qué problema de usabilidad genera un botón plano sin ninguna significancia visual?",o:["El usuario no lo identifica como interactivo, violando el principio de affordance","El botón es más rápido de renderizar","Mejora la accesibilidad del formulario","No genera ningún problema"],a:0,d:"dificil"},
+{q:"¿Qué heurística de Nielsen se viola cuando una app web tiene un flujo de navegación completamente diferente al estándar?",o:["Consistencia y estándares (y también la Ley de Jakob)","Diseño minimalista","Ayuda y documentación","Visibilidad del estado"],a:0,d:"dificil"},
+{q:"¿Por qué Commons Digester es necesaria como dependencia de JasperReports?",o:["Porque analiza las reglas de configuración XML de los ficheros JRXML durante la compilación","Porque genera los PDFs","Porque gestiona la conexión a la BD","Porque exporta a Excel"],a:0,d:"dificil"},
+{q:"Si un sistema muestra una barra de carga al 50% pero en realidad ya terminó, ¿qué heurística se viola?",o:["Visibilidad del estado del sistema (información incorrecta al usuario)","Prevención de errores","Consistencia y estándares","Diseño minimalista"],a:0,d:"dificil"},
+{q:"¿Cuál es la relación entre el ratio de contraste 4.5:1 WCAG AA y la accesibilidad?",o:["Garantiza que personas con baja visión o daltonismo puedan leer el texto al tener suficiente diferencia de brillo","Es solo una recomendación estética","Solo aplica a imágenes","Solo aplica a vídeos"],a:0,d:"dificil"}
+]
+];
+
+// ===================== QUIZ ENGINE =====================
+let currentExam = -1;
+let currentQ = 0;
+let examQuestions = [];
+
+function shuffleArray(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
+
+function startExam(idx) {
+    currentExam = idx;
+    currentQ = 0;
+    // Shuffle options for each question (keeping track of correct answer)
+    examQuestions = allExams[idx].map(q => {
+        const options = q.o.map((text, i) => ({ text, isCorrect: i === q.a }));
+        const shuffled = shuffleArray(options);
+        return { ...q, shuffledOptions: shuffled };
+    });
+    document.getElementById('examSelector').style.display = 'none';
+    document.getElementById('quizArea').classList.add('visible');
+    buildStreakDots();
+    showQuestion();
+}
+
+function buildStreakDots() {
+    const container = document.getElementById('streakDots');
+    container.innerHTML = '';
+    for (let i = 0; i < 40; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'streak-dot';
+        dot.id = 'dot-' + i;
+        container.appendChild(dot);
+    }
+}
+
+function showQuestion() {
+    const q = examQuestions[currentQ];
+    document.getElementById('qNum').textContent = currentQ + 1;
+    document.getElementById('progressBar').style.width = ((currentQ / 40) * 100) + '%';
+    
+    const badge = document.getElementById('diffBadge');
+    badge.textContent = q.d === 'facil' ? 'Fácil' : q.d === 'media' ? 'Media' : 'Difícil';
+    badge.className = 'difficulty-badge difficulty-' + q.d;
+
+    document.getElementById('qText').textContent = q.q;
+
+    const grid = document.getElementById('optionsGrid');
+    grid.innerHTML = '';
+    q.shuffledOptions.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.textContent = opt.text;
+        btn.onclick = () => selectAnswer(btn, opt.isCorrect, i);
+        grid.appendChild(btn);
+    });
+
+    // Update current dot
+    for (let i = 0; i < 40; i++) {
+        const dot = document.getElementById('dot-' + i);
+        if (dot) dot.classList.remove('current');
+    }
+    const currentDot = document.getElementById('dot-' + currentQ);
+    if (currentDot) currentDot.classList.add('current');
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function selectAnswer(btn, isCorrect, idx) {
+    // Disable all buttons
+    const allBtns = document.querySelectorAll('.option-btn');
+    allBtns.forEach(b => b.classList.add('disabled'));
+
+    if (isCorrect) {
+        btn.classList.add('correct');
+        const dot = document.getElementById('dot-' + currentQ);
+        if (dot) { dot.classList.add('filled'); dot.classList.remove('current'); }
+
+        setTimeout(() => {
+            currentQ++;
+            if (currentQ >= 40) {
+                showSuccess();
+            } else {
+                showQuestion();
+            }
+        }, 600);
+    } else {
+        btn.classList.add('wrong');
+        // Show correct answer
+        allBtns.forEach(b => {
+            const q = examQuestions[currentQ];
+            const optText = b.textContent;
+            const correctOpt = q.shuffledOptions.find(o => o.isCorrect);
+            if (optText === correctOpt.text) {
+                b.classList.add('correct');
+            }
+        });
+        setTimeout(() => {
+            showFail();
+        }, 1200);
+    }
+}
+
+function showFail() {
+    const q = examQuestions[currentQ];
+    document.getElementById('failMsg').textContent = 
+        'Fallaste en la pregunta ' + (currentQ + 1) + '. Vuelves a empezar desde la pregunta 1.';
+    document.getElementById('failOverlay').classList.add('visible');
+}
+
+function showSuccess() {
+    document.getElementById('progressBar').style.width = '100%';
+    document.getElementById('successOverlay').classList.add('visible');
+}
+
+function restartExam() {
+    document.getElementById('failOverlay').classList.remove('visible');
+    currentQ = 0;
+    // Re-shuffle options
+    examQuestions = allExams[currentExam].map(q => {
+        const options = q.o.map((text, i) => ({ text, isCorrect: i === q.a }));
+        const shuffled = shuffleArray(options);
+        return { ...q, shuffledOptions: shuffled };
+    });
+    buildStreakDots();
+    showQuestion();
+}
+
+function backToSelector() {
+    document.getElementById('failOverlay').classList.remove('visible');
+    document.getElementById('successOverlay').classList.remove('visible');
+    document.getElementById('quizArea').classList.remove('visible');
+    document.getElementById('examSelector').style.display = 'grid';
+}
+</script>
+</body>
+</html>

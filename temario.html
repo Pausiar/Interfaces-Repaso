@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resúmenes — Desarrollo de Interfaces</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="topnav">
+        <a href="index.html" class="nav-logo">DI</a>
+        <div class="nav-links">
+            <a href="temario.html" class="active">Resúmenes</a>
+            <a href="examenes.html">Exámenes</a>
+        </div>
+    </nav>
+
+    <div class="temario-container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <h3>Índice</h3>
+            <ul>
+                <li><a href="#tema4" class="sidebar-link active">Tema 4: Usabilidad</a>
+                    <ul>
+                        <li><a href="#t4-contexto">Contexto</a></li>
+                        <li><a href="#t4-iso">Definición ISO 9241-11</a></li>
+                        <li><a href="#t4-dimensiones">Dimensiones</a></li>
+                        <li><a href="#t4-diseno">Diseño visual</a></li>
+                        <li><a href="#t4-usuarios">Perfiles de usuario</a></li>
+                        <li><a href="#t4-modelos">Modelos mentales</a></li>
+                        <li><a href="#t4-organizacion">Organización visual</a></li>
+                        <li><a href="#t4-patrones">Patrones de escaneo</a></li>
+                        <li><a href="#t4-ventanas">Ventanas y diálogos</a></li>
+                        <li><a href="#t4-affordance">Affordance</a></li>
+                        <li><a href="#t4-color">Teoría del color</a></li>
+                        <li><a href="#t4-accesibilidad">Accesibilidad</a></li>
+                        <li><a href="#t4-tipografia">Tipografía</a></li>
+                        <li><a href="#t4-iconografia">Iconografía</a></li>
+                        <li><a href="#t4-controles">Controles</a></li>
+                        <li><a href="#t4-pruebas">Pruebas de usabilidad</a></li>
+                        <li><a href="#t4-heuristicas">Heurísticas de Nielsen</a></li>
+                    </ul>
+                </li>
+                <li><a href="#tema5" class="sidebar-link">Tema 5: Informes</a>
+                    <ul>
+                        <li><a href="#t5-fundamentos">Fundamentos</a></li>
+                        <li><a href="#t5-vs-tablas">Informes vs Tablas</a></li>
+                        <li><a href="#t5-arquitectura">Arquitectura en el IDE</a></li>
+                        <li><a href="#t5-secciones">Secciones del informe</a></li>
+                        <li><a href="#t5-grupos">Lógica de grupos</a></li>
+                        <li><a href="#t5-filtrado">Filtrado</a></li>
+                        <li><a href="#t5-phpreports">PHPReports</a></li>
+                        <li><a href="#t5-crystal">Crystal Reports</a></li>
+                        <li><a href="#t5-jasper">JasperReports</a></li>
+                        <li><a href="#t5-visores">Visores y exportación</a></li>
+                        <li><a href="#t5-recursos">Gestión de recursos</a></li>
+                        <li><a href="#t5-dependencias">Dependencias</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="temario-main">
+            <!-- ================== TEMA 4 ================== -->
+            <section id="tema4">
+                <h1 class="tema-title">Tema 4: Usabilidad y diseño de interfaces gráficas</h1>
+
+                <!-- CONTEXTO -->
+                <article id="t4-contexto" class="card">
+                    <h2>Contexto: Tipos de interfaces según su uso</h2>
+                    <div class="two-col">
+                        <div class="col">
+                            <h3>Uso obligado</h3>
+                            <p>El usuario <strong>no tiene opción</strong> de elegir otra interfaz.</p>
+                            <p><em>Ejemplo:</em> El software interno de un banco.</p>
+                            <p><strong>Riesgo:</strong> Si es mala, el usuario se frustra pero debe adaptarse.</p>
+                        </div>
+                        <div class="col">
+                            <h3>Uso electivo</h3>
+                            <p>El usuario <strong>tiene alternativas</strong>.</p>
+                            <p><em>Ejemplo:</em> Una tienda online o un buscador web.</p>
+                            <p><strong>Impacto:</strong> Si la usabilidad es mala, el usuario se va a la competencia inmediatamente.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ISO 9241-11 -->
+                <article id="t4-iso" class="card">
+                    <h2>Definición ISO 9241-11</h2>
+                    <blockquote>
+                        "El grado en que un producto puede ser usado por usuarios específicos para conseguir objetivos específicos con <strong>efectividad</strong>, <strong>eficiencia</strong> y <strong>satisfacción</strong> en un contexto de uso específico."
+                    </blockquote>
+                    <div class="three-col">
+                        <div class="col highlight-box">
+                            <h4>¿Quién?</h4>
+                            <p>Usuario</p>
+                        </div>
+                        <div class="col highlight-box">
+                            <h4>¿Qué?</h4>
+                            <p>Objetivo</p>
+                        </div>
+                        <div class="col highlight-box">
+                            <h4>¿Dónde?</h4>
+                            <p>Contexto</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- DIMENSIONES -->
+                <article id="t4-dimensiones" class="card">
+                    <h2>Dimensiones de la usabilidad</h2>
+                    <h3>Eficacia vs Eficiencia</h3>
+                    <div class="two-col">
+                        <div class="col">
+                            <h4>Eficacia → ¿Lo logré?</h4>
+                            <p>Capacidad de lograr el objetivo con precisión y plenitud.</p>
+                            <p><em>Ejemplo:</em> Un usuario logra comprar un billete de avión sin equivocarse de fecha.</p>
+                        </div>
+                        <div class="col">
+                            <h4>Eficiencia → ¿Cuánto me costó?</h4>
+                            <p>Recursos empleados (tiempo, esfuerzo mental) para lograr ese objetivo.</p>
+                            <p><em>Ejemplo:</em> Comprar el billete en 3 clics vs 15 clics.</p>
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <strong>Conclusión:</strong> La eficacia es un prerrequisito. La eficiencia es una optimización.
+                    </div>
+
+                    <h3>Aprendizaje y memorabilidad</h3>
+                    <div class="two-col">
+                        <div class="col">
+                            <h4>Facilidad de aprendizaje</h4>
+                            <p>¿Qué fácil es para un usuario realizar tareas básicas la primera vez que se encuentra con el diseño?</p>
+                            <p>Clave para sistemas de <strong>uso público</strong> (webs).</p>
+                        </div>
+                        <div class="col">
+                            <h4>Memorabilidad</h4>
+                            <p>Cuando los usuarios vuelven al diseño después de un periodo de no usarlo, ¿qué fácil les resulta restablecer su competencia?</p>
+                            <p>Clave para software de <strong>uso esporádico</strong> (ej. declaración de impuestos).</p>
+                        </div>
+                    </div>
+
+                    <h3>Tolerancia al error</h3>
+                    <ul class="styled-list">
+                        <li><strong>Prevenir errores:</strong> Usar calendarios en lugar de pedir escribir fechas manualmente.</li>
+                        <li><strong>Recuperación:</strong> Mensajes de error claros ("Falta el @") en lugar de códigos ("Error 404").</li>
+                        <li><strong>Reversibilidad:</strong> El botón Deshacer es la mejor herramienta para un usuario.</li>
+                    </ul>
+                </article>
+
+                <!-- DISEÑO VISUAL -->
+                <article id="t4-diseno" class="card">
+                    <h2>Principios de diseño visual</h2>
+                    <div class="three-col">
+                        <div class="col highlight-box">
+                            <h4>Agrupamiento</h4>
+                            <p>Organizar el espacio en bloques lógicos. Los controles similares deben estar juntos.</p>
+                        </div>
+                        <div class="col highlight-box">
+                            <h4>Visibilidad</h4>
+                            <p>Los controles frecuentes visibles; los raros, ocultos o plegados. Principio de reducción del desorden.</p>
+                        </div>
+                        <div class="col highlight-box">
+                            <h4>Consistencia</h4>
+                            <p>Mantener la misma distribución y estilo para funciones similares en toda la app.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- USUARIOS -->
+                <article id="t4-usuarios" class="card">
+                    <h2>Perfiles de usuario: novato vs experto</h2>
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Característica</th>
+                                <th>Usuario novato</th>
+                                <th>Usuario experto</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Necesidad principal</td>
+                                <td>Claridad, guía paso a paso, seguridad</td>
+                                <td>Rapidez, eficiencia, control total</td>
+                            </tr>
+                            <tr>
+                                <td>Interfaz ideal</td>
+                                <td>Asistentes, menús explicativos, iconos con texto</td>
+                                <td>Atajos de teclado, comandos, personalización</td>
+                            </tr>
+                            <tr>
+                                <td>Miedo al error</td>
+                                <td>Alto (necesita confirmaciones)</td>
+                                <td>Bajo (sabe cómo solucionarlo)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+
+                <!-- MODELOS MENTALES -->
+                <article id="t4-modelos" class="card">
+                    <h2>Modelos mentales</h2>
+                    <p>Un <strong>modelo mental</strong> es lo que el usuario cree sobre cómo funciona un sistema.</p>
+                    <p>Si el diseño no coincide con el modelo mental del usuario, habrá <strong>fricción</strong>.</p>
+                    <div class="info-box">
+                        <strong>Ley de Jakob:</strong> Los usuarios pasan la mayor parte de su tiempo en otros sitios. Esperan que el tuyo funcione igual.
+                    </div>
+                    <p><em>Ejemplo:</em> Si pones el logo a la derecha en vez de a la izquierda, confundirás al usuario porque rompe su modelo mental de inicio.</p>
+                </article>
+
+                <!-- ORGANIZACIÓN -->
+                <article id="t4-organizacion" class="card">
+                    <h2>Principios de organización visual</h2>
+                    <div class="two-col">
+                        <div class="col">
+                            <h3>Ley de Miller</h3>
+                            <p>La memoria a corto plazo solo retiene entre <strong>5 y 9 elementos</strong>.</p>
+                            <p>No pongas menús con 15 opciones seguidas; agrúpalos.</p>
+                        </div>
+                        <div class="col">
+                            <h3>Principio de agrupamiento (Gestalt)</h3>
+                            <p>Los elementos que están cerca se perciben como relacionados.</p>
+                            <p>Usa el espacio en blanco para separar secciones, no solo líneas.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PATRONES -->
+                <article id="t4-patrones" class="card">
+                    <h2>Patrones de escaneo</h2>
+                    <div class="two-col">
+                        <div class="col">
+                            <h3>Patrón en F</h3>
+                            <p>Típico en páginas con <strong>mucho texto</strong> (blogs, noticias).</p>
+                            <p>El usuario lee la primera línea, baja un poco, lee otra línea corta y luego escanea verticalmente el lado izquierdo.</p>
+                        </div>
+                        <div class="col">
+                            <h3>Patrón en Z</h3>
+                            <p>Típico en <strong>Landing Pages</strong> o diseños con poco texto.</p>
+                            <p>El ojo va de arriba-izquierda a arriba-derecha, cruza en diagonal y termina abajo-derecha (ideal para poner el botón de comprar).</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- VENTANAS -->
+                <article id="t4-ventanas" class="card">
+                    <h2>Ventanas y diálogos</h2>
+                    <div class="two-col">
+                        <div class="col">
+                            <h3>Diálogos modales</h3>
+                            <p><strong>Bloquean</strong> el resto de la aplicación. El usuario NO puede hacer nada más hasta que cierre la ventana.</p>
+                            <p><em>Uso:</em> Errores críticos, confirmación de borrado ("¿Seguro que desea eliminar?").</p>
+                        </div>
+                        <div class="col">
+                            <h3>Diálogos no modales</h3>
+                            <p><strong>Permiten interactuar</strong> con la ventana principal mientras siguen abiertos.</p>
+                            <p><em>Uso:</em> Paletas de herramientas, ventanas de búsqueda ("Buscar y reemplazar").</p>
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <strong>Ejemplos prácticos:</strong>
+                        <ul>
+                            <li>Aviso de batería baja → <strong>No modal</strong> (no debe interrumpir)</li>
+                            <li>Panel de colores en Photoshop → <strong>No modal</strong> (necesitas ver el lienzo)</li>
+                            <li>Guardar cambios al cerrar → <strong>Modal</strong> (decisión crítica)</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- AFFORDANCE -->
+                <article id="t4-affordance" class="card">
+                    <h2>Affordance (asequibilidad)</h2>
+                    <div class="two-col">
+                        <div class="col">
+                            <h4>Affordance</h4>
+                            <p>Es lo que un objeto <strong>puede hacer</strong>. Por ejemplo, un botón tiene la affordance de ser presionado.</p>
+                        </div>
+                        <div class="col">
+                            <h4>Significancia</h4>
+                            <p>Es la <strong>pista visual</strong> que comunica la affordance. Una sombra, un borde o un gradiente son significantes que le dicen al cerebro: "esto es un botón".</p>
+                        </div>
+                    </div>
+                    <p><em>Ejemplo:</em> Un enlace azul y subrayado → Significancia: color azul + línea inferior → Affordance: navegar a otra página.</p>
+                </article>
+
+                <!-- COLOR -->
+                <article id="t4-color" class="card">
+                    <h2>Teoría del color</h2>
+                    <div class="two-col">
+                        <div class="col">
+                            <h3>Propiedades</h3>
+                            <ul class="styled-list">
+                                <li><strong>Tonalidad:</strong> El color en sí (rojo, verde).</li>
+                                <li><strong>Saturación:</strong> Pureza del color. Colores muy saturados cansan la vista.</li>
+                                <li><strong>Brillo:</strong> Cantidad de luz. Importante para la jerarquía visual.</li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <h3>Reglas</h3>
+                            <ul class="styled-list">
+                                <li><strong>Contraste:</strong> Texto oscuro sobre fondo claro (o viceversa).</li>
+                                <li><strong>No usar solo color:</strong> El color no debe ser el único medio para transmitir información (daltónicos).</li>
+                                <li><strong>Evitar azul puro en texto:</strong> El ojo humano tiene dificultad para enfocar el azul puro en líneas finas.</li>
+                                <li><strong>Cultural:</strong> El rojo puede significar peligro o suerte según la cultura.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ACCESIBILIDAD -->
+                <article id="t4-accesibilidad" class="card">
+                    <h2>Accesibilidad web</h2>
+                    <p>Diseñar para todos, incluyendo personas con discapacidad visual.</p>
+                    <div class="two-col">
+                        <div class="col highlight-box">
+                            <h4>Daltonismo</h4>
+                            <p>Nunca uses <strong>solo el color</strong> para transmitir información importante. Acompaña siempre con iconos o texto.</p>
+                        </div>
+                        <div class="col highlight-box">
+                            <h4>Ratio de contraste 4.5:1</h4>
+                            <p>El estándar <strong>WCAG AA</strong> exige que el texto tenga suficiente contraste con el fondo (4,5 veces más brillo que el color más oscuro).</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- TIPOGRAFÍA -->
+                <article id="t4-tipografia" class="card">
+                    <h2>Tipografía en pantalla</h2>
+                    <div class="two-col">
+                        <div class="col">
+                            <h4>Serif</h4>
+                            <p>Tradicionalmente mejor para <strong>papel impreso</strong>. En pantallas de baja resolución puede verse borrosa, aunque las pantallas modernas las soportan bien.</p>
+                        </div>
+                        <div class="col">
+                            <h4>Sans Serif</h4>
+                            <p>Generalmente preferida para <strong>interfaces digitales</strong> por su limpieza y legibilidad a tamaños pequeños.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ICONOGRAFÍA -->
+                <article id="t4-iconografia" class="card">
+                    <h2>Iconografía</h2>
+                    <p>Los iconos ahorran espacio y se reconocen rápido, <strong>PERO son peligrosos si son ambiguos</strong>.</p>
+                    <div class="info-box">
+                        <strong>Regla:</strong> Siempre acompaña el icono de una etiqueta de texto o un tooltip al pasar el ratón.
+                    </div>
+                    <p>Un icono sin texto genera <strong>duda → fricción → mala usabilidad</strong>.</p>
+                </article>
+
+                <!-- CONTROLES -->
+                <article id="t4-controles" class="card">
+                    <h2>Controles de formulario</h2>
+                    <div class="two-col">
+                        <div class="col">
+                            <h3>Radio button</h3>
+                            <p>Selección <strong>exclusiva</strong> (1 de N). Si seleccionas uno, se deselecciona el otro.</p>
+                            <p>Siempre debe haber uno seleccionado por defecto.</p>
+                            <p><em>Ejemplo:</em> Sexo, Método de pago.</p>
+                        </div>
+                        <div class="col">
+                            <h3>Checkbox</h3>
+                            <p>Selección <strong>múltiple</strong> (0 a N). Son independientes entre sí.</p>
+                            <p><em>Ejemplo:</em> Ingredientes de una pizza, Acepto los términos.</p>
+                        </div>
+                    </div>
+                    <div class="two-col" style="margin-top:1rem">
+                        <div class="col">
+                            <h3>Drop-down list (lista desplegable)</h3>
+                            <p>El usuario solo puede elegir <strong>una opción</strong> de la lista cerrada. Evita errores de escritura.</p>
+                        </div>
+                        <div class="col">
+                            <h3>Combo box</h3>
+                            <p>Combina una caja de texto con una lista. El usuario puede <strong>elegir o escribir</strong> un valor nuevo.</p>
+                            <p><em>Ejemplo:</em> Selector de tamaño de fuente en Word.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PRUEBAS -->
+                <article id="t4-pruebas" class="card">
+                    <h2>Pruebas de usabilidad</h2>
+                    <div class="two-col">
+                        <div class="col">
+                            <h3>Test con usuarios</h3>
+                            <p>Observar a una persona real intentando realizar una tarea específica (sin ayudarle). Se mide dónde se atasca, qué dice y cuánto tarda.</p>
+                        </div>
+                        <div class="col">
+                            <h3>Evaluación heurística</h3>
+                            <p>Expertos revisan la interfaz buscando violaciones de principios conocidos.</p>
+                        </div>
+                    </div>
+                    <h3>Tipos de test</h3>
+                    <table class="styled-table">
+                        <thead>
+                            <tr><th>Tipo</th><th>Fase</th><th>Objetivo</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Exploratorio</td><td>Inicial (requisitos/diseño)</td><td>Evaluar conceptos preliminares y detectar errores de base</td></tr>
+                            <tr><td>De evaluación</td><td>Intermedia</td><td>Validar la ejecución de operaciones específicas</td></tr>
+                            <tr><td>De validación</td><td>Final</td><td>Certificar que el producto cumple los estándares de usabilidad</td></tr>
+                            <tr><td>De comparación</td><td>Cualquiera</td><td>Comparar alternativas de diseño o con la competencia</td></tr>
+                        </tbody>
+                    </table>
+                </article>
+
+                <!-- HEURÍSTICAS -->
+                <article id="t4-heuristicas" class="card">
+                    <h2>Las 10 heurísticas de Jakob Nielsen</h2>
+                    <ol class="heuristics-list">
+                        <li><strong>Visibilidad del estado:</strong> El sistema siempre debe informar al usuario de lo que está ocurriendo (ej. barra de carga).</li>
+                        <li><strong>Correspondencia con el mundo real:</strong> Hablar el lenguaje del usuario, usar palabras y conceptos familiares (ej. icono de papelera).</li>
+                        <li><strong>Control y libertad del usuario:</strong> Ofrecer "salidas de emergencia" claras para deshacer acciones no deseadas.</li>
+                        <li><strong>Consistencia y estándares:</strong> Seguir las convenciones de la plataforma. No reinventar la rueda.</li>
+                        <li><strong>Prevención de errores:</strong> Es mejor un diseño que prevenga errores que buenos mensajes de error.</li>
+                        <li><strong>Reconocer mejor que recordar:</strong> Hacer visibles los objetos y opciones. El usuario no debe tener que recordar información.</li>
+                        <li><strong>Flexibilidad y eficiencia:</strong> Aceleradores para expertos (atajos de teclado) que son invisibles para novatos.</li>
+                        <li><strong>Diseño estético y minimalista:</strong> No contener información irrelevante. Cada unidad extra compite con la relevante.</li>
+                        <li><strong>Ayudar a reconocer errores:</strong> Los mensajes de error deben estar en lenguaje claro y sugerir una solución.</li>
+                        <li><strong>Ayuda y documentación:</strong> Aunque es mejor no necesitarla, debe ser fácil de buscar y centrada en tareas.</li>
+                    </ol>
+                </article>
+            </section>
+
+            <!-- ================== TEMA 5 ================== -->
+            <section id="tema5">
+                <h1 class="tema-title">Tema 5: Confección de informes</h1>
+
+                <!-- FUNDAMENTOS -->
+                <article id="t5-fundamentos" class="card">
+                    <h2>Fundamentos teóricos</h2>
+                    <p>Los informes representan la <strong>fase final</strong> de la obtención de información útil de una base de datos.</p>
+                    <ul class="styled-list">
+                        <li><strong>Formato universal:</strong> Presentan información en un lenguaje visual y escrito que cualquier usuario puede comprender sin formación previa.</li>
+                        <li><strong>Portabilidad:</strong> Al estar diseñados para impresión, otorgan a los datos un elemento de permanencia y movilidad fuera del sistema.</li>
+                        <li><strong>Planificación:</strong> Construir un informe es un proyecto más complejo que crear una consulta SQL; requiere definir jerarquías, flujos y sumarios.</li>
+                    </ul>
+                </article>
+
+                <!-- INFORMES VS TABLAS -->
+                <article id="t5-vs-tablas" class="card">
+                    <h2>Informes vs Tablas</h2>
+                    <div class="two-col">
+                        <div class="col">
+                            <h3>La tabla</h3>
+                            <p>Muestra registros individuales crudos. Carece de capacidad de síntesis y requiere que el usuario realice cálculos externos para extraer conclusiones.</p>
+                        </div>
+                        <div class="col">
+                            <h3>El informe</h3>
+                            <p>Permite ver detalles críticos a primera vista. Representa resultados que <strong>no existen físicamente</strong> en la BD, como campos calculados, porcentajes e indicadores de rendimiento.</p>
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        Un informe automatiza la labor de una calculadora. Incluye <strong>metadatos vitales</strong>: números de página, fechas de generación y agrupaciones lógicas predefinidas.
+                    </div>
+                </article>
+
+                <!-- ARQUITECTURA -->
+                <article id="t5-arquitectura" class="card">
+                    <h2>Arquitectura en el IDE</h2>
+                    <div class="two-col">
+                        <div class="col">
+                            <h3>Informes incrustados (Embedded)</h3>
+                            <ul class="styled-list">
+                                <li>Se importa o crea dentro del árbol del proyecto del IDE.</li>
+                                <li><strong>Generación de clase:</strong> Se genera automáticamente una clase contenedora.</li>
+                                <li><strong>Seguridad:</strong> Al compilar, el informe se incrusta en el ensamblado (DLL/EXE).</li>
+                                <li><strong>Disponibilidad:</strong> Autocompletado de campos y parámetros.</li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <h3>Informes no incrustados (External)</h3>
+                            <ul class="styled-list">
+                                <li>Archivos independientes al binario principal.</li>
+                                <li>Acceso gestionado en <strong>tiempo de ejecución</strong>.</li>
+                                <li>Ideales para sistemas donde el diseño cambia con frecuencia.</li>
+                                <li>Permiten <strong>actualización en caliente</strong> sin recompilar.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <table class="styled-table">
+                        <thead>
+                            <tr><th>Característica</th><th>Incrustado</th><th>No incrustado</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Implementación</td><td>Simple, menos archivos</td><td>Compleja, gestión de rutas</td></tr>
+                            <tr><td>Seguridad</td><td>Alta, protegido</td><td>Baja, editable en disco</td></tr>
+                            <tr><td>Mantenimiento</td><td>Requiere recompilación</td><td>Actualización en caliente</td></tr>
+                            <tr><td>Uso ideal</td><td>Apps de escritorio cerradas</td><td>ERPs e informes web dinámicos</td></tr>
+                        </tbody>
+                    </table>
+                </article>
+
+                <!-- SECCIONES -->
+                <article id="t5-secciones" class="card">
+                    <h2>Secciones del informe</h2>
+                    <div class="section-flow">
+                        <div class="flow-item">
+                            <span class="flow-label">Cabecera del informe</span>
+                            <p>Título y fecha. Aparece una sola vez al inicio. Logos y fecha global.</p>
+                        </div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-item">
+                            <span class="flow-label">Cabecera de página</span>
+                            <p>Encabezados de columna. Se repite en cada folio. Numeración.</p>
+                        </div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-item">
+                            <span class="flow-label">Cabecera de grupo</span>
+                            <p>Indica el inicio de una nueva categoría (ej: Nueva Ciudad).</p>
+                        </div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-item">
+                            <span class="flow-label">Detalle</span>
+                            <p>Cuerpo del informe. Aquí reside el grueso de la información. Se expande conforme se procesan los datos.</p>
+                        </div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-item">
+                            <span class="flow-label">Pie de grupo</span>
+                            <p>Resúmenes y subtotales por categoría.</p>
+                        </div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-item">
+                            <span class="flow-label">Pie de informe</span>
+                            <p>Totales generales que afectan a la totalidad del documento.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- GRUPOS -->
+                <article id="t5-grupos" class="card">
+                    <h2>Lógica de grupos</h2>
+                    <div class="three-col">
+                        <div class="col highlight-box">
+                            <h4>Filtros de orden</h4>
+                            <p>Los grupos permiten clasificar los registros según criterios específicos.</p>
+                        </div>
+                        <div class="col highlight-box">
+                            <h4>Pie de grupo</h4>
+                            <p>Ubicación estratégica para subtotales, recuentos y promedios específicos de ese conjunto de datos.</p>
+                        </div>
+                        <div class="col highlight-box">
+                            <h4>Totales generales</h4>
+                            <p>El pie de Informe contiene los sumarios que afectan a la totalidad del documento.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- FILTRADO -->
+                <article id="t5-filtrado" class="card">
+                    <h2>Filtrado</h2>
+                    <ul class="styled-list">
+                        <li>El informe solo debe generarse sobre los registros que cumplan las condiciones.</li>
+                        <li><strong>Filtrar en el origen (SQL)</strong> es más eficiente que filtrar en el destino.</li>
+                        <li><strong>Campos indexados:</strong> Regla de oro → basar los filtros en campos indexados para tiempos de respuesta óptimos en Big Data.</li>
+                        <li><strong>Identificación alternativa:</strong> Si no hay campo de "ciudad", buscar por rango de códigos postales o prefijos telefónicos.</li>
+                    </ul>
+                </article>
+
+                <!-- PHPREPORTS -->
+                <article id="t5-phpreports" class="card">
+                    <h2>PHPReports</h2>
+                    <p>PHPReports utiliza archivos <strong>XML</strong> que definen la lógica visual y de datos.</p>
+                    <ol class="styled-list">
+                        <li>Se instancia la clase <code>PHPReportMaker</code>.</li>
+                        <li>Se definen credenciales de BD mediante <code>setUser</code> y <code>setPassword</code>.</li>
+                        <li>Se vincula la lógica mediante <code>setXML("archivo.xml")</code>.</li>
+                        <li>El método <code>run()</code> ejecuta el motor de transformación XSL.</li>
+                    </ol>
+                    <h3>Funciones de agregación (Tag COL)</h3>
+                    <table class="styled-table">
+                        <thead>
+                            <tr><th>Función</th><th>Acción</th><th>Uso común</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>getValue(campo)</code></td><td>Recupera el valor actual del puntero en la fila</td><td>Mostrar nombres de productos</td></tr>
+                            <tr><td><code>getSum(campo)</code></td><td>Acumulador en memoria para el grupo actual</td><td>Subtotales de facturas</td></tr>
+                            <tr><td><code>getMax(campo)</code></td><td>Compara y almacena el valor más alto</td><td>Récords de ventas</td></tr>
+                            <tr><td><code>getRowCount()</code></td><td>Cuenta las filas del grupo</td><td>Contar ítems por pedido</td></tr>
+                        </tbody>
+                    </table>
+                </article>
+
+                <!-- CRYSTAL REPORTS -->
+                <article id="t5-crystal" class="card">
+                    <h2>Crystal Reports</h2>
+                    <h3>Modelos de objetos SDK</h3>
+                    <div class="three-col">
+                        <div class="col highlight-box">
+                            <h4>CrystalReportViewer</h4>
+                            <p>Modelo más ligero. Controles de la interfaz visual para ver e imprimir informes desde la aplicación cliente.</p>
+                        </div>
+                        <div class="col highlight-box">
+                            <h4>ReportDocument</h4>
+                            <p>Modelo exhaustivo. Permite manipular programáticamente el informe en tiempo de ejecución: filtros, parámetros y conexiones.</p>
+                        </div>
+                        <div class="col highlight-box">
+                            <h4>InfoObject</h4>
+                            <p>Modelo orientado a servidores Enterprise. Configuración y programación avanzada en Crystal Reports Server.</p>
+                        </div>
+                    </div>
+                    <h3>Pasos para crear un informe en Visual Studio</h3>
+                    <ol class="styled-list">
+                        <li><strong>Proyecto:</strong> Nuevo Proyecto → Reporting → Aplicación de Crystal Reports.</li>
+                        <li><strong>Galería:</strong> Seleccionar "Usar asistente de informes" y elegir estilo Estándar.</li>
+                        <li><strong>Conexión:</strong> Configurar OLE DB (ADO) para SQL Server.</li>
+                        <li><strong>Datos:</strong> Elegir tablas del catálogo y mapear los campos requeridos.</li>
+                    </ol>
+                </article>
+
+                <!-- JASPER -->
+                <article id="t5-jasper" class="card">
+                    <h2>JasperReports</h2>
+                    <div class="section-flow">
+                        <div class="flow-item">
+                            <span class="flow-label">1. Fichero JRXML</span>
+                            <p>Documento XML legible donde se define el aspecto y las expresiones de datos.</p>
+                        </div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-item">
+                            <span class="flow-label">2. Compilación → .jasper</span>
+                            <p>El JRXML se compila para obtener un fichero .jasper binario. Solo se recompila si hay cambios en el diseño.</p>
+                        </div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-item">
+                            <span class="flow-label">3. Llenado → JasperPrint</span>
+                            <p>Se une el .jasper con un DataSource (SQL o colecciones) para generar un objeto JasperPrint en memoria.</p>
+                        </div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-item">
+                            <span class="flow-label">4. Distribución</span>
+                            <p>El objeto JasperPrint se exporta a PDF, HTML, Excel o Word.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- VISORES -->
+                <article id="t5-visores" class="card">
+                    <h2>Visores y herramientas de exportación</h2>
+                    <div class="three-col">
+                        <div class="col highlight-box">
+                            <h4>JRViewer</h4>
+                            <p>Basado en <strong>JPanel</strong>. Panel de visualización, controles de impresión y almacenado integrados en la app.</p>
+                        </div>
+                        <div class="col highlight-box">
+                            <h4>JasperViewer</h4>
+                            <p>Extiende <strong>JFrame</strong>. Ventana independiente con todas las herramientas de navegación de informes.</p>
+                        </div>
+                        <div class="col highlight-box">
+                            <h4>JasperExportManager</h4>
+                            <p>Clase de utilidad para <strong>exportaciones directas</strong> a ficheros físicos sin interfaz gráfica al usuario.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- RECURSOS -->
+                <article id="t5-recursos" class="card">
+                    <h2>Gestión de recursos</h2>
+                    <ul class="styled-list">
+                        <li><strong>Invariabilidad de rutas:</strong> Al empaquetar un JAR, las rutas de disco fallan. Los informes deben estar en el ClassPath del proyecto.</li>
+                        <li><strong>Uso de getResource():</strong> El método <code>getClass().getResource()</code> permite acceder a ficheros de forma independiente al sistema operativo.</li>
+                        <li><strong>Empaquetado automático:</strong> En IDEs como IntelliJ o Eclipse, las carpetas marcadas como Resources se inyectan en el classpath final durante la construcción.</li>
+                    </ul>
+                </article>
+
+                <!-- DEPENDENCIAS -->
+                <article id="t5-dependencias" class="card">
+                    <h2>Dependencias externas de JasperReports</h2>
+                    <table class="styled-table">
+                        <thead>
+                            <tr><th>Librería Apache</th><th>Misión</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Commons Logging</td><td>Gestión centralizada de depuración de errores del motor</td></tr>
+                            <tr><td>Commons Digester</td><td>Análisis de las reglas de configuración XML de los ficheros JRXML</td></tr>
+                            <tr><td>iText PDF Library</td><td>Motor de renderizado a bajo nivel para la generación de PDFs</td></tr>
+                            <tr><td>Apache POI</td><td>Transformar los datos en libros de Microsoft Excel</td></tr>
+                        </tbody>
+                    </table>
+                </article>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>Desarrollo de Interfaces — DAM</p>
+    </footer>
+
+    <script>
+        // Highlight active sidebar link on scroll
+        const sections = document.querySelectorAll('article[id]');
+        const sidebarLinks = document.querySelectorAll('.sidebar a');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 120;
+                if (pageYOffset >= sectionTop) current = section.getAttribute('id');
+            });
+            sidebarLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -17,7 +17,21 @@
 
     <div class="exam-container">
         <h1 class="tema-title" style="text-align:center;margin-top:1rem;">Exámenes tipo test</h1>
-        <p style="text-align:center;color:#8b949e;margin-bottom:2rem;">4 exámenes · 40 preguntas · Si fallas, empiezas de 0</p>
+        <p style="text-align:center;color:#8b949e;margin-bottom:1.5rem;">4 exámenes · 40 preguntas · Elige tu modo de práctica</p>
+
+        <!-- Mode Toggle -->
+        <div class="mode-toggle-container">
+            <div class="mode-toggle">
+                <button class="mode-btn active" id="btnEstricto" onclick="setMode(false)">
+                    💀 Estricto
+                    <span class="mode-desc">Si fallas, empiezas de 0</span>
+                </button>
+                <button class="mode-btn" id="btnRepaso" onclick="setMode(true)">
+                    📖 Repaso
+                    <span class="mode-desc">Si fallas, continúas</span>
+                </button>
+            </div>
+        </div>
 
         <div class="exam-selector" id="examSelector">
             <button class="exam-btn" onclick="startExam(0)">Examen 1<div class="difficulty-info">20 fácil · 10 media · 10 difícil</div></button>
@@ -59,8 +73,8 @@
     <!-- SUCCESS OVERLAY -->
     <div class="result-overlay" id="successOverlay">
         <div class="result-card">
-            <div class="result-icon">🏆</div>
-            <div class="result-title" style="color:#3fb950;">¡Examen completado!</div>
+            <div class="result-icon" id="successIcon">🏆</div>
+            <div class="result-title" id="successTitle" style="color:#3fb950;">¡Examen completado!</div>
             <div class="result-msg" id="successMsg">Has contestado las 40 preguntas correctamente.</div>
             <button class="result-btn btn-success" onclick="backToSelector()">Volver a exámenes</button>
         </div>
@@ -274,6 +288,14 @@ const allExams = [
 let currentExam = -1;
 let currentQ = 0;
 let examQuestions = [];
+let reviewMode = false;
+let wrongCount = 0;
+
+function setMode(review) {
+    reviewMode = review;
+    document.getElementById('btnEstricto').classList.toggle('active', !review);
+    document.getElementById('btnRepaso').classList.toggle('active', review);
+}
 
 function shuffleArray(arr) {
     const a = [...arr];
@@ -287,6 +309,7 @@ function shuffleArray(arr) {
 function startExam(idx) {
     currentExam = idx;
     currentQ = 0;
+    wrongCount = 0;
     // Shuffle options for each question (keeping track of correct answer)
     examQuestions = allExams[idx].map(q => {
         const options = q.o.map((text, i) => ({ text, isCorrect: i === q.a }));
@@ -372,9 +395,24 @@ function selectAnswer(btn, isCorrect, idx) {
                 b.classList.add('correct');
             }
         });
-        setTimeout(() => {
-            showFail();
-        }, 1200);
+        if (reviewMode) {
+            // Mark dot as missed and continue
+            const dot = document.getElementById('dot-' + currentQ);
+            if (dot) { dot.classList.add('missed'); dot.classList.remove('current'); }
+            wrongCount++;
+            setTimeout(() => {
+                currentQ++;
+                if (currentQ >= 40) {
+                    showSuccess();
+                } else {
+                    showQuestion();
+                }
+            }, 1200);
+        } else {
+            setTimeout(() => {
+                showFail();
+            }, 1200);
+        }
     }
 }
 
@@ -387,12 +425,32 @@ function showFail() {
 
 function showSuccess() {
     document.getElementById('progressBar').style.width = '100%';
+    if (reviewMode) {
+        if (wrongCount === 0) {
+            document.getElementById('successIcon').textContent = '🏆';
+            document.getElementById('successTitle').textContent = '¡Sin errores!';
+            document.getElementById('successTitle').style.color = '#3fb950';
+            document.getElementById('successMsg').textContent = '¡Perfecto! Has repasado las 40 preguntas sin ningún fallo.';
+        } else {
+            document.getElementById('successIcon').textContent = '📖';
+            document.getElementById('successTitle').textContent = '¡Repaso completado!';
+            document.getElementById('successTitle').style.color = '#d29922';
+            document.getElementById('successMsg').textContent =
+                'Has terminado el repaso con ' + wrongCount + ' error' + (wrongCount === 1 ? '' : 'es') + ' sobre 40 preguntas.';
+        }
+    } else {
+        document.getElementById('successIcon').textContent = '🏆';
+        document.getElementById('successTitle').textContent = '¡Examen completado!';
+        document.getElementById('successTitle').style.color = '#3fb950';
+        document.getElementById('successMsg').textContent = 'Has contestado las 40 preguntas correctamente.';
+    }
     document.getElementById('successOverlay').classList.add('visible');
 }
 
 function restartExam() {
     document.getElementById('failOverlay').classList.remove('visible');
     currentQ = 0;
+    wrongCount = 0;
     // Re-shuffle options
     examQuestions = allExams[currentExam].map(q => {
         const options = q.o.map((text, i) => ({ text, isCorrect: i === q.a }));
